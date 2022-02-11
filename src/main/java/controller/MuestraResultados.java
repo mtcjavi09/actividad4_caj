@@ -37,6 +37,7 @@ public class MuestraResultados extends HttpServlet
             int area = triangle.getArea();
             //SE AGREGAN SENTENCIAS DE REFERENCIA PARA EL JSP
             request.setAttribute("Cálculos realizados", triangle);
+            //SE ENVÍA EL OBJETO AL JSP
             request.getRequestDispatcher("/PantallaResultado.jsp").forward(request,response);            
         }
     }
