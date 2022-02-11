@@ -2,7 +2,7 @@
     Document   : index
     Created on : 10 feb 2022, 19:18:00
     Author     : Maria Tchijov Cruz
-    Calculador de área y perímetro de triángulos equiláteros.
+    Calculador de área y perímetro de triángulos equiláteros usando servlets y jsp.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
