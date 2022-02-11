@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    APP 07 : CALCULOS EQUILATERO JSP.
+    FECHA: 10 DE ENERO DE 2022.
+    AUTORA: MARIA TCHIJOV CRUZ.
+    CALCULADORA DE PERÍMETRO Y ÁREA DE TRIÁNGULO USANDO SERVLETS.
  */
 package controller;
 
@@ -13,36 +14,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author mashj
- */
-@WebServlet(name = "MuestraResultados", urlPatterns = {"/MuestraResultados"})
-public class MuestraResultados extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "MuestraResultados", urlPatterns = {"/MuestraResultados"})
+public class MuestraResultados extends HttpServlet 
+{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException 
+    {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MuestraResultados</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MuestraResultados at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try ( PrintWriter out = response.getWriter()) 
+        {
+            //SE PIDEN LOS DOS PARÁMETROS
+            String base = request.getParameter("base");
+            String altura = request.getParameter("altura");
+            //SE REFERENCIA AL MODELO, CREANDO UN NUEVO OBJETO
+            model.Triangulo triangle = new model.Triangulo(base, altura);
+            //SE LLAMAN A LOS MÉTODOS PERÍMETRO Y ÁREA
+            triangle.perimetro();
+            triangle.area();
+            //SE GUARDAN LOS RESULTADOS
+            int perimetro = triangle.getPerimetro();
+            int area = triangle.getArea();
+            //SE AGREGAN SENTENCIAS DE REFERENCIA PARA EL JSP
+            request.setAttribute("Cálculos realizados", triangle);
+            request.getRequestDispatcher("/PantallaResultado.jsp").forward(request,response);            
         }
     }
 
