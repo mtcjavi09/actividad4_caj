@@ -11,6 +11,7 @@ package model;
 public class Triangulo 
 {
     //ATRIBUTOS DE LA CLASE
+    private String nombre;
     private int base;
     private int altura;
     private int perimetro;
@@ -23,7 +24,13 @@ public class Triangulo
         this.setAltura(Integer.parseInt(altura));
     }
     
+    //CONSTRUCTOR PARA UTILIZAR ÚNICAMENTE LOS MÉTODOS DE LA CLASE
+    public Triangulo() {}
+    
+       
     //MÉTODOS GET Y SET PARA ATRIBUTOS PRIVADOS
+    public String getNombre() {return nombre;}
+    public void setNombre(String nombre) {this.nombre = nombre;}       
     public int getBase() {return base;}
     public void setBase(int base) {this.base = base;}
     public int getAltura() {return altura;}

@@ -24,15 +24,7 @@
             Triangulo triangle = (Triangulo) request.getAttribute("Cálculos realizados");
         %>
         <!-- Se muestran los resultados al usuario -->
-        <h3>
-            <!-- Los datos ingresados -->
-            Base: <%=triangle.getBase()%><br>
-            Altura: <%=triangle.getAltura()%>
-        </h3>
-        <h2>
-            <!-- La fórmula y el resultado de los cálculos -->
-            Área: (<%=triangle.getBase()%> * <%=triangle.getAltura()%>) / 2 = <%=triangle.getArea()%><br>
-            Perímetro: 3 * <%=triangle.getBase()%> = <%=triangle.getPerimetro()%>
-        </h2>
+        <h2>Área:<br>(<%=triangle.getBase()%> * <%=triangle.getAltura()%>) / 2 = <%=triangle.getArea()%></h2><br>
+        <h2>Perímetro:<br>3 * <%=triangle.getBase()%> = <%=triangle.getPerimetro()%></h2>
     </body>
 </html>

@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(name = "MuestraResultados", urlPatterns = {"/MuestraResultados"})
@@ -32,9 +34,25 @@ public class MuestraResultados extends HttpServlet
             //SE LLAMAN A LOS MÉTODOS PERÍMETRO Y ÁREA
             triangle.perimetro();
             triangle.area();
-            //SE GUARDAN LOS RESULTADOS
+            //SE GUARDAN LOS RESULTADOS EN VARIABLES LOCALES DEL SERLVET
             int perimetro = triangle.getPerimetro();
             int area = triangle.getArea();
+            //SE GUARDA EL NOMBRE DEL USUARIO COMO ATRIBUTO DE SESIÓN PARA SU USO POSTERIOR
+            HttpSession sesion = request.getSession();
+            sesion.setAttribute("nombre", "Maria");
+            //SE GUARDAN LOS RESULTADOS EN UNAS COOKIES
+            Cookie ck1 = new Cookie("base", triangle.getBase() + "");
+            response.addCookie(ck1);
+            ck1.setMaxAge(5000);
+            Cookie ck2 = new Cookie("altura", triangle.getAltura() + "");
+            response.addCookie(ck2);
+            ck2.setMaxAge(5000);
+            Cookie ck3 = new Cookie("perimetro", triangle.getPerimetro() + "");
+            response.addCookie(ck3);
+            ck3.setMaxAge(5000);
+            Cookie ck4 = new Cookie("area", triangle.getArea() + "");
+            response.addCookie(ck4);
+            ck4.setMaxAge(5000);
             //SE AGREGAN SENTENCIAS DE REFERENCIA PARA EL JSP
             request.setAttribute("Cálculos realizados", triangle);
             //SE ENVÍA EL OBJETO AL JSP
