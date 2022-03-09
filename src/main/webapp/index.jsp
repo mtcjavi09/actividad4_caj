@@ -37,10 +37,9 @@
             if (e.hasMoreElements())
             {
                 name = sesion.getAttribute("nombre").toString();
-                if(name != null || name == "")
+                if(name != null || name != "")
                 {mensajeUsuario = "Los resultados calculados por " + name + " en la sesión anterior, fueron:";}
-            }
-            
+            }            
             //Se crean las variables que guardarán las cookies
             String base = "", altura = "", perimetro = "", area = "";
             //Se verifica si existen cookies guardadas
@@ -63,17 +62,11 @@
                     {area = ck[x].getValue();}
                 }
                 
-                mensajePerimetro = "Perímetro: " + base + " * 3 = " + perimetro;
-                mensajeArea = "Área: (" + base + " * " + altura + ") / 2 = " + area;
+                if (base != "" && perimetro != "")
+                {mensajePerimetro = "Perímetro: " + base + " * 3 = " + perimetro;}
+                if (base != "" && altura != "" && area != "")
+                {mensajeArea = "Área: (" + base + " * " + altura + ") / 2 = " + area;}
             }
-            
-            //Se pregunta el nombre al usuario y se guarda en un atributo de sesión
-            String nombre = JOptionPane.showInputDialog("Bienvenid@ a la calculadora de triángulos MTC\n"
-                    + "Ingresa tu nombre:");
-            //Se crea el objeto triangle para acceder a los métodos
-            Triangulo triangle = new Triangulo();
-            //Se guarda el nombre en el atributo para su posterior guardado en los atributos de la sesión
-            triangle.setNombre(nombre);
         %>
         
         <h3><%if (mensajeUsuario != "") {out.print(mensajeUsuario);}%></h3>
@@ -83,8 +76,13 @@
         <!-- Se referencia al Servlet MuestraResultados -->
         <form action="MuestraResultados" method="post">
             <!-- Se saluda al usuario -->
-            <h1>¡Bienvenid@, <%out.print(triangle.getNombre());%>! :D</h1>
+            <h1>¡Bienvenid@ a la calculadora de triángulos! :D</h1>
             <h2>A continuación, llena la siguiente información: </h2>
+            <!-- Se pide el nombre del usuario -->
+            <% if(!e.hasMoreElements() || e.equals(null))
+            {%>Usuario:<br><input type="text" name="usuario" value=""><%}
+            else
+            {%>Tu nombre es: <%out.print(name+"\n");}%><br>
             <!-- Se pide la base y la altura -->
             Base:<br>
             <input type="text" name="base" value=""><br>

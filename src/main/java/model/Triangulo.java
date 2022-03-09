@@ -23,10 +23,6 @@ public class Triangulo
         this.setBase(Integer.parseInt(base));
         this.setAltura(Integer.parseInt(altura));
     }
-    
-    //CONSTRUCTOR PARA UTILIZAR ÚNICAMENTE LOS MÉTODOS DE LA CLASE
-    public Triangulo() {}
-    
        
     //MÉTODOS GET Y SET PARA ATRIBUTOS PRIVADOS
     public String getNombre() {return nombre;}

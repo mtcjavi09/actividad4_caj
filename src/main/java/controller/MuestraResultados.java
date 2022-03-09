@@ -29,8 +29,11 @@ public class MuestraResultados extends HttpServlet
             //SE PIDEN LOS DOS PARÁMETROS
             String base = request.getParameter("base");
             String altura = request.getParameter("altura");
+            String usuario = request.getParameter("usuario");
             //SE REFERENCIA AL MODELO, CREANDO UN NUEVO OBJETO
             model.Triangulo triangle = new model.Triangulo(base, altura);
+            //SE GUARDA EL USUARIO EN EL ATRIBUTO NOMBRE
+            triangle.setNombre(usuario);
             //SE LLAMAN A LOS MÉTODOS PERÍMETRO Y ÁREA
             triangle.perimetro();
             triangle.area();
@@ -39,7 +42,7 @@ public class MuestraResultados extends HttpServlet
             int area = triangle.getArea();
             //SE GUARDA EL NOMBRE DEL USUARIO COMO ATRIBUTO DE SESIÓN PARA SU USO POSTERIOR
             HttpSession sesion = request.getSession();
-            sesion.setAttribute("nombre", "Maria");
+            sesion.setAttribute("nombre", usuario);
             //SE GUARDAN LOS RESULTADOS EN UNAS COOKIES
             Cookie ck1 = new Cookie("base", triangle.getBase() + "");
             response.addCookie(ck1);
