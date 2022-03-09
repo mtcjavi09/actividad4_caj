@@ -84,7 +84,7 @@
             else
             {%>Tu nombre es: 
             <%  out.print(name+"\n");
-                sesion.setAttribute("nombre", name);
+                request.setAttribute("usuario", name);
             }%><br>
             <!-- Se pide la base y la altura -->
             Base:<br>
