@@ -11,7 +11,7 @@
 <!-- Importa el modelo para guardar el nombre del usuario -->
 <%@page import="model.Triangulo"%>
 <!-- Se notifica que es una sesión http -->
-<%@page import="java.util.*" import="javax.swing.*" session="true"%> 
+<%@page import="java.util.*" import="javax.servlet.*" session="true"%> 
 <!-- Comienza la página del formulario -->
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,7 @@
                 name = sesion.getAttribute("nombre").toString();
                 if(name != null || name != "")
                 {mensajeUsuario = "Los resultados calculados por " + name + " en la sesión anterior, fueron:";}
-            }            
+            }
             //Se crean las variables que guardarán las cookies
             String base = "", altura = "", perimetro = "", area = "";
             //Se verifica si existen cookies guardadas
@@ -84,7 +84,6 @@
             else
             {%>Tu nombre es: 
             <%  out.print(name+"\n");
-                request.setAttribute("usuario", name);
             }%><br>
             <!-- Se pide la base y la altura -->
             Base:<br>
