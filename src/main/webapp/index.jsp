@@ -82,7 +82,10 @@
             <% if(!e.hasMoreElements() || e.equals(null))
             {%>Usuario:<br><input type="text" name="usuario" value=""><%}
             else
-            {%>Tu nombre es: <%out.print(name+"\n");}%><br>
+            {%>Tu nombre es: 
+            <%  out.print(name+"\n");
+                sesion.setAttribute("nombre", name);
+            }%><br>
             <!-- Se pide la base y la altura -->
             Base:<br>
             <input type="text" name="base" value=""><br>

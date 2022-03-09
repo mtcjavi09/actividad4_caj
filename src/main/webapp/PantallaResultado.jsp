@@ -19,10 +19,14 @@
     <body>
         <!-- Se hace el request para el servlet -->
         <%
+            //Se crea el objeto triángulo
             Triangulo triangle = (Triangulo) request.getAttribute("Cálculos realizados");
+            //Se recuperan los atributos de la sesión
+            HttpSession sesion = request.getSession();
+            sesion.getAttributeNames();
         %>
         <!-- Comienza la pantalla de resultados -->
-        <h1><%=triangle.getNombre()%>, los resultados son:</h1>
+        <h1>¡Hola <%=sesion.getAttribute("nombre")%>! Los resultados de tus cálculos son:</h1>
         <!-- Se muestran los resultados al usuario -->
         <h2>Área:<br>(<%=triangle.getBase()%> * <%=triangle.getAltura()%>) / 2 = <%=triangle.getArea()%></h2>
         <h2>Perímetro:<br>3 * <%=triangle.getBase()%> = <%=triangle.getPerimetro()%></h2>
