@@ -34,7 +34,7 @@
             String mensajeUsuario = "", mensajePerimetro = "", mensajeArea = "";
             
             //Si encuentra un nombre, se guarda en la variable name
-            if (e.hasMoreElements())
+            if(e.hasMoreElements())
             {
                 name = sesion.getAttribute("nombre").toString();
                 if(name != null || name != "")
@@ -44,34 +44,37 @@
             String base = "", altura = "", perimetro = "", area = "";
             //Se verifica si existen cookies guardadas
             Cookie ck[]= request.getCookies();
-            if (ck != null)
+            if(ck != null)
             {
-                for (int x = 0; x<ck.length; x++)
+                for(int x = 0; x<ck.length; x++)
                 {
                     //SE VERIFICA EL ÚLTIMO VALOR DE LA BASE
-                    if (ck[x].getName().equals("base"))
+                    if(ck[x].getName().equals("base"))
                     {base = ck[x].getValue();}
                     //SE VERIFICA EL ÚLTIMO VALOR DE LA ALTURA
-                    if (ck[x].getName().equals("altura"))
+                    if(ck[x].getName().equals("altura"))
                     {altura = ck[x].getValue();}
                     //SE VERIFICA EL ÚLTIMO VALOR DEL PERÍMETRO
-                    if (ck[x].getName().equals("perimetro"))
+                    if(ck[x].getName().equals("perimetro"))
                     {perimetro = ck[x].getValue();}
                     //SE VERIFICA EL ÚLTIMO VALOR DEL ÁREA
-                    if (ck[x].getName().equals("area"))
+                    if(ck[x].getName().equals("area"))
                     {area = ck[x].getValue();}
                 }
                 
-                if (base != "" && perimetro != "")
+                if(base != "" && perimetro != "")
                 {mensajePerimetro = "Perímetro: " + base + " * 3 = " + perimetro;}
-                if (base != "" && altura != "" && area != "")
+                if(base != "" && altura != "" && area != "")
                 {mensajeArea = "Área: (" + base + " * " + altura + ") / 2 = " + area;}
             }
+        
+            if (request.getAttribute("flag") != null)
+            {out.print("<h4>Los números menores a 0 no se pueden utilizar</h4>");}   
         %>
         
-        <h3><%if (mensajeUsuario != "") {out.print(mensajeUsuario);}%></h3>
-        <h4><%if (mensajePerimetro != "") {out.print(mensajePerimetro);}%></h4>
-        <h4><%if (mensajeArea != "") {out.print(mensajeArea);}%></h4>
+        <h3><%if(mensajeUsuario != "") {out.print(mensajeUsuario);}%></h3>
+        <h4><%if(mensajePerimetro != "") {out.print(mensajePerimetro);}%></h4>
+        <h4><%if(mensajeArea != "") {out.print(mensajeArea);}%></h4>
         
         <!-- Se referencia al Servlet MuestraResultados -->
         <form action="MuestraResultados" method="post">

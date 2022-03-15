@@ -26,40 +26,50 @@ public class MuestraResultados extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) 
         {
-            //SE PIDEN LOS DOS PARÁMETROS
-            String base = request.getParameter("base");
-            String altura = request.getParameter("altura");
-            String usuario = request.getParameter("usuario");
-            //SE REFERENCIA AL MODELO, CREANDO UN NUEVO OBJETO
-            model.Triangulo triangle = new model.Triangulo(base, altura);
-            //SE GUARDA EL USUARIO EN EL ATRIBUTO NOMBRE
-            triangle.setNombre(usuario);
-            //SE LLAMAN A LOS MÉTODOS PERÍMETRO Y ÁREA
-            triangle.perimetro();
-            triangle.area();
-            //SE GUARDAN LOS RESULTADOS EN VARIABLES LOCALES DEL SERLVET
-            int perimetro = triangle.getPerimetro();
-            int area = triangle.getArea();
-            //SE GUARDA EL NOMBRE DEL USUARIO COMO ATRIBUTO DE SESIÓN PARA SU USO POSTERIOR
-            HttpSession sesion = request.getSession();
-            sesion.setAttribute("nombre", usuario);
-            //SE GUARDAN LOS RESULTADOS EN UNAS COOKIES
-            Cookie ck1 = new Cookie("base", triangle.getBase() + "");
-            response.addCookie(ck1);
-            ck1.setMaxAge(5000);
-            Cookie ck2 = new Cookie("altura", triangle.getAltura() + "");
-            response.addCookie(ck2);
-            ck2.setMaxAge(5000);
-            Cookie ck3 = new Cookie("perimetro", triangle.getPerimetro() + "");
-            response.addCookie(ck3);
-            ck3.setMaxAge(5000);
-            Cookie ck4 = new Cookie("area", triangle.getArea() + "");
-            response.addCookie(ck4);
-            ck4.setMaxAge(5000);
-            //SE AGREGAN SENTENCIAS DE REFERENCIA PARA EL JSP
-            request.setAttribute("Cálculos realizados", triangle);
-            //SE ENVÍA EL OBJETO AL JSP
-            request.getRequestDispatcher("/PantallaResultado.jsp").forward(request,response);            
+            //SE VERIFICA SI LOS DATOS FUERON VÁLIDOS
+            if (request.getAttribute("flag") != null)
+            {
+                request.setAttribute("flag", 1);
+                request.getRequestDispatcher("/index.jsp").forward(request,response);
+            }
+            
+            else
+            {
+                //SE PIDEN LOS DOS PARÁMETROS
+                String base = request.getParameter("base");
+                String altura = request.getParameter("altura");
+                String usuario = request.getParameter("usuario");
+                //SE REFERENCIA AL MODELO, CREANDO UN NUEVO OBJETO
+                model.Triangulo triangle = new model.Triangulo(base, altura);
+                //SE GUARDA EL USUARIO EN EL ATRIBUTO NOMBRE
+                triangle.setNombre(usuario);
+                //SE LLAMAN A LOS MÉTODOS PERÍMETRO Y ÁREA
+                triangle.perimetro();
+                triangle.area();
+                //SE GUARDAN LOS RESULTADOS EN VARIABLES LOCALES DEL SERLVET
+                int perimetro = triangle.getPerimetro();
+                int area = triangle.getArea();
+                //SE GUARDA EL NOMBRE DEL USUARIO COMO ATRIBUTO DE SESIÓN PARA SU USO POSTERIOR
+                HttpSession sesion = request.getSession();
+                sesion.setAttribute("nombre", usuario);
+                //SE GUARDAN LOS RESULTADOS EN UNAS COOKIES
+                Cookie ck1 = new Cookie("base", triangle.getBase() + "");
+                response.addCookie(ck1);
+                ck1.setMaxAge(5000);
+                Cookie ck2 = new Cookie("altura", triangle.getAltura() + "");
+                response.addCookie(ck2);
+                ck2.setMaxAge(5000);
+                Cookie ck3 = new Cookie("perimetro", triangle.getPerimetro() + "");
+                response.addCookie(ck3);
+                ck3.setMaxAge(5000);
+                Cookie ck4 = new Cookie("area", triangle.getArea() + "");
+                response.addCookie(ck4);
+                ck4.setMaxAge(5000);
+                //SE AGREGAN SENTENCIAS DE REFERENCIA PARA EL JSP
+                request.setAttribute("Cálculos realizados", triangle);
+                //SE ENVÍA EL OBJETO AL JSP
+                request.getRequestDispatcher("/PantallaResultado.jsp").forward(request,response);
+            }
         }
     }
 
